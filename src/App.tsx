@@ -60,12 +60,12 @@ export default function App() {
   };
 
   return (
-    <div id="siltawi-app-root" className="bg-[#0f172a] text-slate-100 min-h-screen selection:bg-sky-500 selection:text-slate-950 scroll-smooth relative overflow-hidden">
-      {/* Mesh Background Elements representing the Frosted Glass design theme */}
-      <div className="pointer-events-none fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/15 blur-[120px] z-0"></div>
-      <div className="pointer-events-none fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-500/15 blur-[120px] z-0"></div>
-      <div className="pointer-events-none fixed top-[25%] right-[10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[110px] z-0"></div>
-      <div className="pointer-events-none fixed bottom-[30%] left-[-5%] w-[45%] h-[45%] rounded-full bg-teal-500/10 blur-[130px] z-0"></div>
+    <div id="siltawi-app-root" className="bg-[#050814] text-slate-100 min-h-screen selection:bg-sky-500 selection:text-slate-950 scroll-smooth relative overflow-hidden">
+      {/* Subtle Ambient Glow Elements representing our refined luxury theme */}
+      <div className="pointer-events-none fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-sky-500/5 blur-[150px] z-0"></div>
+      <div className="pointer-events-none fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-teal-500/5 blur-[150px] z-0"></div>
+      <div className="pointer-events-none fixed top-[25%] right-[10%] w-[40%] h-[40%] rounded-full bg-indigo-500/4 blur-[130px] z-0"></div>
+      <div className="pointer-events-none fixed bottom-[30%] left-[-5%] w-[45%] h-[45%] rounded-full bg-sky-600/4 blur-[150px] z-0"></div>
 
       {/* Sticky Top Header Navigation */}
       <Header activeSection={activeSection} />

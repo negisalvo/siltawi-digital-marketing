@@ -45,7 +45,7 @@ export default function About() {
           <h2 className="text-sm font-mono font-bold tracking-widest text-sky-400 uppercase mb-3">
             About Siltawi
           </h2>
-          <h3 className="text-3xl sm:text-4xl font-sans font-extrabold text-white tracking-tight">
+          <h3 className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight">
             Strategic Growth Partners Built on Innovation
           </h3>
           <p className="font-sans text-slate-400 mt-4 leading-relaxed">
@@ -57,7 +57,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
           
           <div className="space-y-6">
-            <h4 className="font-sans font-bold text-2xl text-white">
+            <h4 className="font-display font-bold text-2xl text-white">
               Who We Are
             </h4>
             <div id="overview-content" className="font-sans text-slate-300 leading-relaxed space-y-4">

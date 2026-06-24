@@ -24,6 +24,7 @@ export default function Contact({ selectedServices, onClearServices }: ContactPr
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
   
   // Interactive Vector Map States
   const [mapZoom, setMapZoom] = useState(15);
@@ -49,10 +50,11 @@ export default function Contact({ selectedServices, onClearServices }: ContactPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
-      alert("Please enter Name, Email, and Phone number.");
+      setValidationError("Please complete all required fields (Name, Email, and Phone) before submitting.");
       return;
     }
 
+    setValidationError(null);
     setIsSubmitting(true);
     
     // Simulate API speed
@@ -87,7 +89,7 @@ export default function Contact({ selectedServices, onClearServices }: ContactPr
           <h2 className="text-sm font-mono font-bold tracking-widest text-sky-400 uppercase mb-3">
             Contact Us
           </h2>
-          <h3 className="text-3xl sm:text-4xl font-sans font-extrabold text-white tracking-tight">
+          <h3 className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight">
             Schedule a Strategic Consultation
           </h3>
           <p className="font-sans text-slate-450 mt-4 leading-relaxed">
@@ -240,6 +242,12 @@ export default function Contact({ selectedServices, onClearServices }: ContactPr
                         className="w-full h-36 p-3 bg-white/5 border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-slate-500 font-sans leading-relaxed resize-none focus:border-white/20 animate-none"
                       />
                     </div>
+
+                    {validationError && (
+                      <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs rounded-xl font-sans text-left">
+                        {validationError}
+                      </div>
+                    )}
 
                     <button
                       type="submit"

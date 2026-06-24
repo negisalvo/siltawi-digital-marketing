@@ -74,7 +74,7 @@ export default function Services({ onSelectServices }: ServicesProps) {
           <h2 className="text-sm font-mono font-bold tracking-widest text-sky-400 uppercase mb-3">
             What We Do
           </h2>
-          <h3 className="text-3xl sm:text-4xl font-sans font-extrabold text-white tracking-tight">
+          <h3 className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight">
             High-Performance Digital Channels
           </h3>
           <p className="font-sans text-slate-450 mt-4 leading-relaxed">
@@ -247,7 +247,7 @@ export default function Services({ onSelectServices }: ServicesProps) {
         {/* Why Choose Siltawi Subgrid */}
         <div>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h4 className="text-2xl font-sans font-extrabold text-white">
+            <h4 className="text-2xl font-display font-bold text-white">
               Why Strategic Businesses Choose Us
             </h4>
             <p className="font-sans text-sm text-slate-400 mt-2">

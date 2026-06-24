@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Megaphone, Globe, Paintbrush, Video, Search } from 'lucide-react';
+import { ArrowRight, Sparkles, Megaphone, Globe, Paintbrush, Video, Search, TrendingUp, BarChart2, Settings, Play } from 'lucide-react';
 import { COMP_INFO } from '../data';
 
 export default function Hero() {
+  const [selectedCampaign, setSelectedCampaign] = useState(0);
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [optimized, setOptimized] = useState(false);
+
+  const campaigns = [
+    { name: "Zemen Retail Ads", baseline: { traffic: "1,240", leads: "42", cr: "1.4%" }, optimized: { traffic: "4,820", leads: "216", cr: "4.5%" } },
+    { name: "EcoCafé Rebranding", baseline: { traffic: "850", leads: "18", cr: "1.1%" }, optimized: { traffic: "3,110", leads: "145", cr: "4.7%" } },
+    { name: "Bole Luxury SEO", baseline: { traffic: "410", leads: "12", cr: "0.9%" }, optimized: { traffic: "1,950", leads: "98", cr: "5.0%" } }
+  ];
+
+  const handleRunOptimization = () => {
+    setIsOptimizing(true);
+    setTimeout(() => {
+      setIsOptimizing(false);
+      setOptimized(true);
+    }, 1500);
+  };
+
+  const handleCampaignChange = (idx: number) => {
+    setSelectedCampaign(idx);
+    setOptimized(false);
+    setIsOptimizing(false);
+  };
+
   const highlightCards = [
     { text: "Digital Marketing", color: "from-sky-500/20 to-sky-400/5", icon: Megaphone, desc: "Lead Multi-Channel Ads" },
     { text: "Website Development", color: "from-teal-500/20 to-teal-400/5", icon: Globe, desc: "Frictionless Checkout UX" },
@@ -74,7 +98,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-sans font-extrabold text-white tracking-tight leading-none mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white tracking-tight leading-none mb-6"
             >
               Strategic Marketing <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-400 to-indigo-400">
@@ -141,50 +165,160 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Image/Feature Display Column */}
+          {/* Right Image/Feature Display Column - Interactive ROI Dashboard Simulation */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative p-6 sm:p-8 glass-card rounded-3xl overflow-hidden"
+              className="relative p-6 sm:p-8 glass-card rounded-3xl overflow-hidden border border-white/5 shadow-2xl"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 rounded-full blur-2xl" />
               
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-widest">Our Strategic Verticals</span>
-                <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+              <div className="flex items-center justify-between mb-5">
+                <span className="text-[10px] font-mono font-black text-sky-400 uppercase tracking-widest flex items-center gap-1.5">
+                  <BarChart2 className="h-3.5 w-3.5 text-sky-400" /> Interactive Campaign Sandbox
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] font-mono text-emerald-400 font-bold uppercase tracking-wide">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Simulator
+                </span>
               </div>
 
-              <div className="space-y-4">
-                {highlightCards.map((card, i) => {
-                  const CardIcon = card.icon;
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                      className="flex items-center gap-4 p-3.5 bg-white/5 border border-white/10 rounded-2xl group transition-all hover:bg-white/10 hover:border-white/20 hover:translate-x-1"
+              {/* Campaign selector tabs */}
+              <div className="grid grid-cols-3 gap-1.5 mb-6">
+                {campaigns.map((camp, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleCampaignChange(idx)}
+                    className={`px-2 py-2 rounded-xl text-[9px] font-mono font-bold uppercase tracking-wider transition-all border ${
+                      selectedCampaign === idx
+                        ? 'bg-sky-500/10 border-sky-500/50 text-white'
+                        : 'bg-white/5 border-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {camp.name.split(' ')[0]}
+                  </button>
+                ))}
+              </div>
+
+              {/* Dashboard display */}
+              <div className="bg-[#020617]/80 rounded-2xl p-5 border border-white/5 space-y-5 text-left">
+                <div className="flex justify-between items-center pb-3 border-b border-white/5">
+                  <span className="text-[11px] font-sans font-bold text-slate-300">
+                    {campaigns[selectedCampaign].name}
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-500 uppercase">
+                    Status: {optimized ? 'Optimized' : 'Baseline'}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <span className="block text-[9px] font-mono text-slate-500 uppercase tracking-wider">Mo. Traffic</span>
+                    <motion.span
+                      key={selectedCampaign + '-' + optimized}
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="block text-base font-mono font-black text-white mt-1"
                     >
-                      <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-950 border border-slate-850 text-sky-400 group-hover:text-teal-400 transition-colors">
-                        <CardIcon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <h4 className="font-sans font-semibold text-sm text-white group-hover:text-sky-400 transition-colors">
-                          {card.text}
-                        </h4>
-                        <p className="text-xs font-sans text-slate-400 mt-0.5">
-                          {card.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                      {optimized ? campaigns[selectedCampaign].optimized.traffic : campaigns[selectedCampaign].baseline.traffic}
+                    </motion.span>
+                  </div>
+                  <div>
+                    <span className="block text-[9px] font-mono text-slate-500 uppercase tracking-wider">Leads Gain</span>
+                    <motion.span
+                      key={selectedCampaign + '-' + optimized + '-leads'}
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="block text-base font-mono font-black text-teal-400 mt-1"
+                    >
+                      {optimized ? campaigns[selectedCampaign].optimized.leads : campaigns[selectedCampaign].baseline.leads}
+                    </motion.span>
+                  </div>
+                  <div>
+                    <span className="block text-[9px] font-mono text-slate-500 uppercase tracking-wider">Conv. Rate</span>
+                    <motion.span
+                      key={selectedCampaign + '-' + optimized + '-cr'}
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="block text-base font-mono font-black text-indigo-400 mt-1"
+                    >
+                      {optimized ? campaigns[selectedCampaign].optimized.cr : campaigns[selectedCampaign].baseline.cr}
+                    </motion.span>
+                  </div>
+                </div>
+
+                {/* SVG Mini Performance Vector Graph */}
+                <div className="h-16 w-full bg-[#080d1e] rounded-xl border border-white/5 relative overflow-hidden flex items-end">
+                  <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    {/* Simulated curve */}
+                    <motion.path
+                      key={selectedCampaign + '-' + optimized + '-curve'}
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.8 }}
+                      d={optimized ? "M0 35 Q 25 32, 50 12 T 100 4" : "M0 35 Q 35 34, 70 32 T 100 28"}
+                      fill="none"
+                      stroke={optimized ? "#38bdf8" : "#64748b"}
+                      strokeWidth="2"
+                    />
+                    {/* Area under curve fill */}
+                    <motion.path
+                      key={selectedCampaign + '-' + optimized + '-area'}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.08 }}
+                      d={optimized ? "M0 35 Q 25 32, 50 12 T 100 4 L 100 40 L 0 40 Z" : "M0 35 Q 35 34, 70 32 T 100 28 L 100 40 L 0 40 Z"}
+                      fill={optimized ? "#38bdf8" : "#64748b"}
+                    />
+                  </svg>
+                  <span className="absolute bottom-1.5 right-2 text-[8px] font-mono text-slate-500 uppercase tracking-wider">
+                    {optimized ? "+320% ROI Trend" : "Stagnant Traffic"}
+                  </span>
+                </div>
               </div>
 
-              <div id="guarantee-box" className="mt-6 pt-5 border-t border-slate-800/80 text-center">
-                <p className="font-sans text-xs text-slate-450 italic">
+              {/* Action controller */}
+              <div className="mt-5 space-y-3">
+                {isOptimizing ? (
+                  <div className="w-full bg-[#020617] rounded-xl p-3 border border-white/5 space-y-2">
+                    <div className="flex justify-between items-center text-[9px] font-mono text-sky-400 uppercase tracking-wider">
+                      <span className="flex items-center gap-1.5">
+                        <Settings className="h-3 w-3 animate-spin" /> Customizing SEO Metrics...
+                      </span>
+                      <span>65%</span>
+                    </div>
+                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-sky-500 rounded-full animate-pulse" style={{ width: '65%' }} />
+                    </div>
+                  </div>
+                ) : !optimized ? (
+                  <button
+                    onClick={handleRunOptimization}
+                    className="w-full py-3.5 rounded-xl bg-sky-500 hover:bg-sky-450 text-slate-950 font-sans font-bold text-xs uppercase tracking-wider transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-sky-500/10"
+                  >
+                    <Play className="h-3.5 w-3.5 fill-slate-950 text-slate-950" />
+                    Simulate Campaign Optimization
+                  </button>
+                ) : (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleCampaignChange(selectedCampaign)}
+                      className="flex-1 py-3.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white text-[10px] font-mono uppercase tracking-wider transition-all"
+                    >
+                      Reset Baseline
+                    </button>
+                    <a
+                      href="#contact"
+                      className="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 text-white font-sans font-bold text-[10px] uppercase tracking-wider transition-all text-center flex items-center justify-center gap-1"
+                    >
+                      Lock In Strategy <ArrowRight className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              <div id="guarantee-box" className="mt-5 pt-4 border-t border-white/5 text-center">
+                <p className="font-sans text-[10px] text-slate-500 italic">
                   "Siltawi" implies "Strategic" in Amharic — Built on results.
                 </p>
               </div>

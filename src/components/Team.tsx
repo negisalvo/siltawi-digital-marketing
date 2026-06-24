@@ -51,7 +51,7 @@ export default function Team() {
           <h2 className="text-sm font-mono font-bold tracking-widest text-sky-400 uppercase mb-3">
             Our Team
           </h2>
-          <h3 className="text-3xl sm:text-4xl font-sans font-extrabold text-white tracking-tight">
+          <h3 className="text-3xl sm:text-4xl font-display font-black text-white tracking-tight">
             Meet the Specialists Behind the Magic
           </h3>
           <p className="font-sans text-slate-450 mt-4 leading-relaxed">
@@ -100,26 +100,15 @@ export default function Team() {
                   id={`team-card-${member.id}`}
                   className="glass-card glass-card-hover overflow-hidden flex flex-col group h-full"
                 >
-                  {/* Portrait photo block */}
-                  <div className="h-64 sm:h-72 w-full relative overflow-hidden bg-slate-950">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      referrerPolicy="no-referrer"
-                      className="h-full w-full object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
-                    />
-                    {/* Shadow overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                    
-                    {/* Department tag badge floating top left */}
-                    <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg text-[9px] font-mono tracking-widest text-sky-400 font-bold uppercase border border-white/15">
-                      <Sparkles className="h-2.5 w-2.5 text-sky-400" />
-                      {member.department.replace('Executive ', '')}
-                    </span>
-                  </div>
-
                   {/* Body textual content */}
                   <div className="p-6 text-left flex flex-col flex-grow">
+                    {/* Department tag badge */}
+                    <div className="mb-4">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 backdrop-blur-md rounded-lg text-[9px] font-mono tracking-widest text-sky-400 font-bold uppercase border border-white/10">
+                        <Sparkles className="h-2.5 w-2.5 text-sky-400" />
+                        {member.department.replace('Executive ', '')}
+                      </span>
+                    </div>
                     <div className="mb-2">
                       <h4 className="font-sans font-bold text-lg text-white group-hover:text-sky-350 transition-colors">
                         {member.name}
